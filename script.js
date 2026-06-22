@@ -23,6 +23,79 @@ let selectedLanguage = "English";
 let selectedService = "";
 let selectedHouse = "";
 let currentUserId = "";
+// ===============================
+// LANGUAGE TRANSLATIONS
+// ===============================
+
+const translations = {
+
+English:{
+
+login:"Login",
+enterName:"Enter Name",
+enterMobile:"Enter Mobile Number",
+
+chooseService:"Choose Service",
+
+electrician:"⚡ Electrician",
+plumber:"🔧 Plumber",
+cleaning:"🧹 Cleaning",
+carpenter:"🪚 Carpenter",
+painting:"🎨 Painting",
+ac:"❄ AC Service",
+
+bookNow:"Book Now",
+profile:"Profile",
+bookings:"Bookings",
+customerCare:"Customer Care"
+
+},
+
+Kannada:{
+
+login:"ಲಾಗಿನ್",
+enterName:"ಹೆಸರು ನಮೂದಿಸಿ",
+enterMobile:"ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ",
+
+chooseService:"ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+
+electrician:"⚡ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್",
+plumber:"🔧 ಪ್ಲಂಬರ್",
+cleaning:"🧹 ಸ್ವಚ್ಛತೆ",
+carpenter:"🪚 ಕಾರ್ಪೆಂಟರ್",
+painting:"🎨 ಪೇಂಟಿಂಗ್",
+ac:"❄ ಎಸಿ ಸೇವೆ",
+
+bookNow:"ಬುಕ್ ಮಾಡಿ",
+profile:"ಪ್ರೊಫೈಲ್",
+bookings:"ಬುಕಿಂಗ್‌ಗಳು",
+customerCare:"ಗ್ರಾಹಕ ಸಹಾಯ"
+
+},
+
+Hindi:{
+
+login:"लॉगिन",
+enterName:"नाम दर्ज करें",
+enterMobile:"मोबाइल नंबर दर्ज करें",
+
+chooseService:"सेवा चुनें",
+
+electrician:"⚡ इलेक्ट्रीशियन",
+plumber:"🔧 प्लंबर",
+cleaning:"🧹 सफाई",
+carpenter:"🪚 बढ़ई",
+painting:"🎨 पेंटिंग",
+ac:"❄ एसी सेवा",
+
+bookNow:"बुक करें",
+profile:"प्रोफाइल",
+bookings:"बुकिंग",
+customerCare:"ग्राहक सहायता"
+
+}
+
+};
 
 // ---------- Screen Navigation ----------
 window.show = function(id){
@@ -35,11 +108,22 @@ window.show = function(id){
 
 // ---------- Language ----------
 window.setLanguage = function(language){
-  selectedLanguage = language;
-  localStorage.setItem("language", language);
-  show("loginScreen");
-};
 
+    selectedLanguage = language;
+    localStorage.setItem("language", language);
+
+    const t = translations[language];
+
+    // Login screen
+    document.querySelector("#loginScreen h2").innerText = t.login;
+    document.getElementById("loginName").placeholder = t.enterName;
+    document.getElementById("mobile").placeholder = t.enterMobile;
+
+    // Dashboard
+    document.querySelector("#dashboardScreen h2").innerText = t.chooseService;
+
+    show("loginScreen");
+};
 // ==========================================
 // SIMPLE LOGIN (NO OTP)
 // ==========================================
@@ -92,11 +176,60 @@ window.loginUser = async function(){
     alert("Unable to login");
 
   }
+// ===============================
+// CHANGE LANGUAGE 
+// PART 2  
+// ===============================
 
+function applyLanguage(language){
+
+    const t = translations[language];
+
+    if(!t) return;
+
+    // Login Screen
+    document.querySelector("#loginScreen h2").textContent = t.login;
+
+    document.getElementById("loginName").placeholder = t.enterName;
+
+    document.getElementById("mobile").placeholder = t.enterMobile;
+
+    document.querySelector("#loginScreen button").textContent = t.login;
+
+    // Dashboard Title
+    document.querySelector("#dashboardScreen h2").textContent = t.chooseService;
+
+    // Service Buttons
+    const serviceButtons = document.querySelectorAll(".service-grid button");
+
+    if(serviceButtons.length >= 6){
+
+        serviceButtons[0].textContent = t.electrician;
+        serviceButtons[1].textContent = t.plumber;
+        serviceButtons[2].textContent = t.cleaning;
+        serviceButtons[3].textContent = t.carpenter;
+        serviceButtons[4].textContent = t.painting;
+        serviceButtons[5].textContent = t.ac;
+
+    }
+
+    // Bottom Navigation
+    const navButtons = document.querySelectorAll(".bottom-nav button");
+
+    if(navButtons.length >= 3){
+
+        navButtons[1].textContent = "📖 " + t.bookings;
+        navButtons[2].textContent = "👤 " + t.profile;
+
+    }
+
+    localStorage.setItem("language", language);
+
+}
 };
 // ==========================================
 // HOME CREW - SCRIPT.JS
-// PART 2
+// PART 3
 // ==========================================
 
 // ---------- Select Service ----------
@@ -151,7 +284,7 @@ window.openComplaint = function(){
 };
 // ==========================================
 // HOME CREW - SCRIPT.JS
-// PART 3
+// PART 4
 // ==========================================
 
 // ---------- Confirm Booking ----------
@@ -263,7 +396,7 @@ window.submitComplaint = async function(){
 };
 // ==========================================
 // HOME CREW - SCRIPT.JS
-// PART 4 (FINAL)
+// PART 5 (FINAL)
 // ==========================================
 
 // ---------- My Bookings ----------
