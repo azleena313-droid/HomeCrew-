@@ -1,312 +1,220 @@
-HTML code 
-
 <!DOCTYPE html>
 <html lang="en">
-	<hd>
-
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Home Crew</title>
-
 <link rel="stylesheet" href="style.css">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
-
 <body>
-
 <!-- Language Screen -->
-
 <section id="languageScreen" class="screen active">
-
 <div class="card">
-
-<h1>Home Crew</h1>
-
+<h1>🏠 Home Crew</h1>
 <p>Select Language</p>
-
 <button onclick="setLanguage('English')">English</button>
-
 <button onclick="setLanguage('Kannada')">ಕನ್ನಡ</button>
-
 <button onclick="setLanguage('Hindi')">हिन्दी</button>
-
 </div>
-
 </section>
-
-<!-- Login Screen -->
-
+<!-- Login -->
 <section id="loginScreen" class="screen">
-
 <div class="card">
-
 <h2>Login</h2>
-
 <input
 type="text"
 id="loginName"
-placeholder="Enter Your Name">
-
+placeholder="Enter Name">
 <input
 type="tel"
 id="mobile"
 placeholder="Enter Mobile Number">
-
 <div id="recaptcha-container"></div>
-
 <button onclick="sendOTP()">
-
 Send OTP
-
 </button>
-
 </div>
-
 </section>
-
-<!-- OTP Screen -->
-
+<!-- OTP -->
 <section id="otpScreen" class="screen">
-
 <div class="card">
-
-<h2>OTP Verification</h2>
-
+<h2>Verify OTP</h2>
 <input
 type="text"
 id="otp"
 placeholder="Enter OTP">
-
 <button onclick="verifyOTP()">
-
 Verify OTP
-
 </button>
-
 </div>
-
 </section>
-
-<!-- Dashboard Screen -->
-
+<!-- Dashboard -->
 <section id="dashboardScreen" class="screen">
-
 <div class="card">
-
-<h2>Select Service</h2>
-
+<h2>Choose Service</h2>
 <div class="service-grid">
-
 <button onclick="selectService('Electrician')">
 ⚡ Electrician
 </button>
-
 <button onclick="selectService('Plumber')">
 🚰 Plumber
 </button>
-
 <button onclick="selectService('Cleaning')">
 🧹 Cleaning
 </button>
-
 <button onclick="selectService('Carpenter')">
 🪚 Carpenter
 </button>
-
 <button onclick="selectService('Painter')">
 🎨 Painter
 </button>
-
 <button onclick="selectService('AC Repair')">
 ❄️ AC Repair
 </button>
-
 <button onclick="selectService('RO Service')">
 💧 RO Service
 </button>
-
-<button onclick="selectService('CCTV Installation')">
+<button onclick="selectService('CCTV')">
 📹 CCTV
 </button>
-
 <button onclick="selectService('Pest Control')">
 🐜 Pest Control
 </button>
-
 <button onclick="selectService('Gardening')">
 🌿 Gardening
 </button>
-
 <button onclick="selectService('Home Shifting')">
 🚚 Home Shifting
 </button>
-
 <button onclick="selectService('General Worker')">
 👷 General Worker
 </button>
-
 </div>
-
 <br>
-
 <button onclick="showBookings()">
 📖 My Bookings
 </button>
-
+<button onclick="show('profileScreen')">
+👤 My Profile
+</button>
+<button onclick="callCustomerCare()">
+📞 Contact Customer Care
+</button>
+<button onclick="openComplaint()">
+📝 Register Complaint
+</button>
+<button onclick="openWhatsApp()">
+💬 WhatsApp Support
+</button>
 </div>
-
 </section>
-
 <!-- House Selection -->
-
 <section id="houseScreen" class="screen">
-
 <div class="card">
-
 <h2>Select House</h2>
-
 <select id="house">
-
 <option value="">Choose House</option>
-
 <option>House 101</option>
 <option>House 102</option>
 <option>House 103</option>
 <option>House 104</option>
 <option>House 105</option>
-
 </select>
-
 <button onclick="goBooking()">
-
 Continue
-
 </button>
-
 </div>
-
 </section>
-
-<!-- Booking Screen -->
-
+<!-- Booking -->
 <section id="bookingScreen" class="screen">
-
 <div class="card">
-
 <h2>Book Service</h2>
-
 <label>Service</label>
-<input type="text" id="selectedService" readonly>
-
+<input id="selectedService" readonly>
 <label>House</label>
-<input type="text" id="selectedHouse" readonly>
-
+<input id="selectedHouse" readonly>
 <label>Address</label>
 <textarea
 id="address"
-placeholder="Enter Full Address"></textarea>
-
+placeholder="Enter Address"></textarea>
 <label>Date</label>
-<input type="date" id="bookingDate">
-
+<input
+type="date"
+id="bookingDate">
 <label>Time</label>
-<input type="time" id="bookingTime">
-
+<input
+type="time"
+id="bookingTime">
 <label>Description</label>
 <textarea
 id="description"
 placeholder="Describe the work"></textarea>
-
 <button onclick="confirmBooking()">
 Confirm Booking
 </button>
-
 </div>
-
 </section>
-
 <!-- Success Screen -->
-
 <section id="successScreen" class="screen">
-
 <div class="card">
-
 <h2>✅ Booking Confirmed</h2>
-
-<p>
-Your booking has been submitted successfully.
-</p>
-
+<p>Your booking has been submitted successfully.</p>
 <button onclick="show('dashboardScreen')">
 Back to Home
 </button>
-
 </div>
-
 </section>
-
-<!-- Profile & My Bookings -->
-
+<!-- Profile -->
 <section id="profileScreen" class="screen">
-
 <div class="card">
-
 <h2>My Profile</h2>
-
 <p><strong>Name:</strong> <span id="profileName"></span></p>
-
 <p><strong>Mobile:</strong> <span id="profileMobile"></span></p>
-
 <hr>
-
 <h2>My Bookings</h2>
-
 <div id="bookingList">
-
 <p>No bookings found.</p>
-
 </div>
-
 <button onclick="show('dashboardScreen')">
-Back
+🏠 Home
 </button>
-
 <button onclick="logout()">
-Logout
+🚪 Logout
 </button>
-
 </div>
-
 </section>
-
 <!-- Bottom Navigation -->
-
 <nav class="bottom-nav">
-
 <button onclick="show('dashboardScreen')">
 🏠<br>Home
 </button>
-
 <button onclick="showBookings()">
 📖<br>Bookings
 </button>
-
 <button onclick="show('profileScreen')">
 👤<br>Profile
 </button>
-
 </nav>
-
-<!-- Firebase & App Scripts -->
-
+<!-- Complaint Screen -->
+<section id="complaintScreen" class="screen">
+<div class="card">
+<h2>Register Complaint</h2>
+<textarea
+id="complaintText"
+placeholder="Write your complaint here..."></textarea>
+<button onclick="submitComplaint()">
+Submit Complaint
+</button>
+<button onclick="show('dashboardScreen')">
+Back
+</button>
+</div>
+</section>
+<!-- Scripts -->
 <script type="module" src="firebase.js"></script>
 <script type="module" src="script.js"></script>
-
 </body>
 </html>
