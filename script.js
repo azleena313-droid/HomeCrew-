@@ -446,7 +446,30 @@ window.showBookings = async function(){
 
                 <p><strong>Time:</strong> ${booking.time}</p>
 
-                <p><strong>Status:</strong> ${booking.status}</p>
+              let color = "#ffc107"; // Pending
+
+if (booking.status === "Accepted") color = "#198754";
+if (booking.status === "Rejected") color = "#dc3545";
+if (booking.status === "Completed") color = "#0d6efd";
+
+html += `
+<div class="booking-card">
+    <h3>${booking.service}</h3>
+
+    <p><strong>Date:</strong> ${booking.date}</p>
+
+    <p><strong>Status:</strong>
+        <span style="
+            color:white;
+            background:${color};
+            padding:4px 10px;
+            border-radius:20px;
+            font-weight:bold;">
+            ${booking.status}
+        </span>
+    </p>
+</div>
+`;
 
                 <button class="cancel-btn"
                 onclick="cancelBooking('${bookingDoc.id}')">
