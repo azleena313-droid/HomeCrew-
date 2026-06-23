@@ -672,3 +672,29 @@ window.addEventListener("load", () => {
     }
 
 });
+
+// ======================================
+// ADMIN PANEL - PART 4
+// Logout & Navigation
+// ======================================
+
+window.openAdminLogin = function () {
+    show("adminLoginScreen");
+};
+
+window.openAdminDashboard = function () {
+    show("adminDashboard");
+};
+
+window.adminLogout = function () {
+
+    if (!confirm("Logout from Admin Panel?")) {
+        return;
+    }
+
+    localStorage.removeItem("adminLoggedIn");
+
+    show("languageScreen");
+
+    alert("Admin Logged Out Successfully");
+};
