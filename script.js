@@ -529,3 +529,145 @@ window.addEventListener("load",()=>{
     }
 
 });
+// ==========================================
+// ADMIN LOGIN
+// ==========================================
+
+window.adminLogin = function () {
+
+    const username = document.getElementById("adminUsername").value.trim();
+    const password = document.getElementById("adminPassword").value.trim();
+
+    if (username === "admin" && password === "HomeCrew@123") {
+
+        localStorage.setItem("adminLoggedIn", "true");
+
+        alert("Welcome Admin");
+
+        show("adminDashboard");
+
+        loadAdminBookings();
+
+    } else {
+
+        alert("Invalid Username or Password");
+
+    }
+
+};
+
+
+// ==========================================
+// ADMIN LOGOUT
+// ==========================================
+
+window.adminLogout = function () {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    document.getElementById("adminUsername").value = "";
+    document.getElementById("adminPassword").value = "";
+
+    show("languageScreen");
+
+};
+// ==========================================
+// LOAD ALL BOOKINGS (ADMIN)
+// ==========================================
+
+window.loadAdminBookings = async function () {
+
+    const bookingsDiv = document.getElementById("adminBookings");
+    const totalBookings = document.getElementById("totalBookings");
+
+    bookingsDiv.innerHTML = "<p>Loading...</p>";
+
+    try {
+
+        const snapshot = await getDocs(collection(db, "bookings"));
+
+        totalBookings.textContent = snapshot.size;
+
+        if (snapshot.empty) {
+            bookingsDiv.innerHTML = "<p>No bookings available.</p>";
+            return;
+        }
+
+        let html = "";
+
+        snapshot.forEach((bookingDoc) => {
+
+            const booking = bookingDoc.data();
+
+            html += `
+
+            <div class="booking-card">
+
+                <h3>${booking.service}</h3>
+
+                <p><strong>Name:</strong> ${booking.name}</p>
+
+                <p><strong>Mobile:</strong> ${booking.mobile}</p>
+
+                <p><strong>House:</strong> ${booking.house}</p>
+
+                <p><strong>Address:</strong> ${booking.address}</p>
+
+                <p><strong>Date:</strong> ${booking.date}</p>
+
+                <p><strong>Time:</strong> ${booking.time}</p>
+
+                <p><strong>Status:</strong>
+                    <span id="status-${bookingDoc.id}">
+                        ${booking.status}
+                    </span>
+                </p>
+
+                <button onclick="updateBookingStatus('${bookingDoc.id}','Accepted')">
+                    ✅ Accept
+                </button>
+
+                <button onclick="updateBookingStatus('${bookingDoc.id}','Rejected')">
+                    ❌ Reject
+                </button>
+
+                <button onclick="updateBookingStatus('${bookingDoc.id}','Completed')">
+                    ✔ Complete
+                </button>
+
+            </div>
+
+            <hr>
+
+            `;
+
+        });
+
+        bookingsDiv.innerHTML = html;
+
+    } catch (error) {
+
+        console.error(error);
+
+        bookingsDiv.innerHTML = "<p>Unable to load bookings.</p>";
+
+    }
+
+};
+
+
+// ==========================================
+// AUTO ADMIN LOGIN
+// ==========================================
+
+window.addEventListener("load", () => {
+
+    if (localStorage.getItem("adminLoggedIn") === "true") {
+
+        show("adminDashboard");
+
+        loadAdminBookings();
+
+    }
+
+});
