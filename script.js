@@ -677,10 +677,18 @@ window.submitComplaint = async function(){
         );
     }
 };
+// ==========================================
+// WELCOME SCREEN STARTUP
+// ==========================================
+
 window.addEventListener("load", () => {
 
-    if(localStorage.getItem("uid")){
+    const uid = localStorage.getItem("uid");
+
+    if(uid){
         autoLogin();
+    }else{
+        show("welcomeScreen");
     }
 
 });
