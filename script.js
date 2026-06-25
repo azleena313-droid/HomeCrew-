@@ -177,6 +177,7 @@ window.loginUser = async function(){
     alert("Unable to login");
 
   }
+  };
 // ===============================
 // CHANGE LANGUAGE 
 // PART 2  
