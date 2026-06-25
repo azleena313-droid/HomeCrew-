@@ -56,6 +56,7 @@ chooseService:"ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
 electrician:"⚡ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್",
 plumber:"🔧 ಪ್ಲಂಬರ್",
 cleaning:"🧹 ಸ್ವಚ್ಛತೆ",
+painting:“🎨 ಪೇಂಟಿಂಗ್”,
 homeShifting:"🚚 ಮನೆ ಸ್ಥಳಾಂತರ",
 generalWorker:"👷 ಸಾಮಾನ್ಯ ಕೆಲಸಗಾರ",
 ac:"❄ ಎಸಿ ಸೇವೆ",
@@ -347,23 +348,20 @@ window.backToDashboard = function(){
 // UPDATE SERVICE BUTTONS
 // ==========================================
 window.updateServiceLanguage = function(){
-    const t =
-    translations[selectedLanguage];
-    const buttons =
-    document.querySelectorAll(
-        ".service-grid button"
-    );
-    if(buttons.length >= 7){
-        if(buttons.length >= 7){
 
-buttons[0].textContent = t.electrician;
-buttons[1].textContent = t.plumber;
-buttons[2].textContent = t.cleaning;
-buttons[3].textContent = t.painting;
-buttons[4].textContent = t.homeShifting;
-buttons[5].textContent = t.generalWorker;
-buttons[6].textContent = t.ac;          
-    }
+const t = translations[selectedLanguage];
+const buttons =
+document.querySelectorAll(".service-grid button");
+if(buttons.length >= 7){
+    buttons[0].textContent = t.electrician;
+    buttons[1].textContent = t.plumber;
+    buttons[2].textContent = t.cleaning;
+    buttons[3].textContent = t.painting;
+    buttons[4].textContent = t.ac;
+    buttons[5].textContent = t.homeShifting;
+    buttons[6].textContent = t.generalWorker;
+}
+
 };
 // ==========================================
 // OVERRIDE APPLY LANGUAGE
