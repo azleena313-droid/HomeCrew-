@@ -34,6 +34,8 @@ electrician:"⚡ Electrician",
 plumber:"🔧 Plumber",
 cleaning:"🧹 Cleaning",
 painting:"🎨 Painting",
+homeShifting:"🚚 Home Shifting",
+generalWorker:"👷 General Worker",
 ac:"❄ AC Service",
 bookNow:"Book Now",
 profile:"Profile",
@@ -54,6 +56,8 @@ chooseService:"ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
 electrician:"⚡ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್",
 plumber:"🔧 ಪ್ಲಂಬರ್",
 cleaning:"🧹 ಸ್ವಚ್ಛತೆ",
+homeShifting:"🚚 ಮನೆ ಸ್ಥಳಾಂತರ",
+generalWorker:"👷 ಸಾಮಾನ್ಯ ಕೆಲಸಗಾರ",
 ac:"❄ ಎಸಿ ಸೇವೆ",
 bookNow:"ಬುಕ್ ಮಾಡಿ",
 profile:"ಪ್ರೊಫೈಲ್",
@@ -75,6 +79,8 @@ electrician:"⚡ इलेक्ट्रीशियन",
 plumber:"🔧 प्लंबर",
 cleaning:"🧹 सफाई",
 painting:"🎨 पेंटिंग",
+homeShifting:"🚚 घर शिफ्टिंग",
+generalWorker:"👷 सामान्य कर्मचारी",
 ac:"❄ एसी सेवा",
 bookNow:"बुक करें",
 profile:"प्रोफ़ाइल",
@@ -348,16 +354,15 @@ window.updateServiceLanguage = function(){
         ".service-grid button"
     );
     if(buttons.length >= 7){
-        buttons[0].textContent =
-        t.electrician;
-        buttons[1].textContent =
-        t.plumber;
-        buttons[2].textContent =
-        t.cleaning;
-        buttons[3].textContent =
-        t.painting;
-        buttons[4].textContent =
-        t.ac;
+        if(buttons.length >= 7){
+
+buttons[0].textContent = t.electrician;
+buttons[1].textContent = t.plumber;
+buttons[2].textContent = t.cleaning;
+buttons[3].textContent = t.painting;
+buttons[4].textContent = t.homeShifting;
+buttons[5].textContent = t.generalWorker;
+buttons[6].textContent = t.ac;          
     }
 };
 // ==========================================
@@ -371,68 +376,6 @@ function(language){
     updateServiceLanguage();
 };
 // ==========================================
-// HOME CREW - MULTILINGUAL CUSTOMER APP
-// PART 5 (FINAL)
-// Complaint System + My Bookings
-// ==========================================
-// ==========================================
-// SUBMIT COMPLAINT
-// ==========================================
-window.submitComplaint = async function(){
-    const complaint =
-    document.getElementById("complaintText").value.trim();
-    if(complaint === ""){
-        alert(
-            selectedLanguage === "Kannada"
-            ? "ದಯವಿಟ್ಟು ನಿಮ್ಮ ದೂರನ್ನು ನಮೂದಿಸಿ"
-            : selectedLanguage === "Hindi"
-            ? "कृपया अपनी शिकायत दर्ज करें"
-            : "Please enter your complaint"
-        );
-        return;
-    }
-    try{
-        await addDoc(
-            collection(db,"complaints"),
-            {
-                uid:
-                localStorage.getItem("uid"),
-                name:
-                localStorage.getItem("userName"),
-                mobile:
-                localStorage.getItem("mobile"),
-                complaint:
-                complaint,
-                status:
-                "Pending",
-                createdAt:
-                serverTimestamp()
-            }
-        );
-        document.getElementById(
-            "complaintText"
-        ).value = "";
-        alert(
-            selectedLanguage === "Kannada"
-            ? "ದೂರು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ"
-            : selectedLanguage === "Hindi"
-            ? "शिकायत सफलतापूर्वक जमा हुई"
-            : "Complaint Submitted Successfully"
-        );
-        show("dashboardScreen");
-    }
-    catch(error){
-        console.error(error);
-        alert(
-            selectedLanguage === "Kannada"
-            ? "ದೂರು ಸಲ್ಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"
-            : selectedLanguage === "Hindi"
-            ? "शिकायत जमा नहीं हुई"
-            : "Unable to submit complaint"
-        );
-    }
-};
-// ==========================================
 // SHOW BOOKINGS
 // ==========================================
 window.showBookings = async function(){
@@ -572,6 +515,90 @@ window.cancelBooking = async function(id){
         );
     }
 };
+  // ==========================================
+// HOME CREW - MULTILINGUAL CUSTOMER APP
+// PART 4
+// Booking System
+// ==========================================
+
+// ==========================================
+// CONFIRM BOOKING
+// ==========================================
+window.confirmBooking = async function(){
+
+const address =
+document.getElementById("address").value.trim();
+const date =
+document.getElementById("bookingDate").value;
+const time =
+document.getElementById("bookingTime").value;
+const description =
+document.getElementById("description").value.trim();
+if(address === ""){
+    alert("Please enter address");
+    return;
+}
+if(date === ""){
+    alert("Please select date");
+    return;
+}
+if(time === ""){
+    alert("Please select time");
+    return;
+}
+try{
+    await addDoc(
+        collection(db,"bookings"),
+        {
+            uid:
+            localStorage.getItem("uid"),
+            name:
+            localStorage.getItem("userName"),
+            mobile:
+            localStorage.getItem("mobile"),
+            service:
+            selectedService,
+            house:
+            selectedHouse,
+            address:
+            address,
+            date:
+            date,
+            time:
+            time,
+            description:
+            description,
+            status:
+            "Pending",
+            createdAt:
+            serverTimestamp()
+        }
+    );
+    document.getElementById("address").value = "";
+    document.getElementById("bookingDate").value = "";
+    document.getElementById("bookingTime").value = "";
+    document.getElementById("description").value = "";
+    alert(
+        selectedLanguage === "Kannada"
+        ? "ಬುಕಿಂಗ್ ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ"
+        : selectedLanguage === "Hindi"
+        ? "बुकिंग सफलतापूर्वक जमा हुई"
+        : "Booking Submitted Successfully"
+    );
+    show("successScreen");
+}
+catch(error){
+    console.error(error);
+    alert(
+        selectedLanguage === "Kannada"
+        ? "ಬುಕಿಂಗ್ ಸಲ್ಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"
+        : selectedLanguage === "Hindi"
+        ? "बुकिंग जमा नहीं हुई"
+        : "Booking Failed"
+    );
+}
+
+};
 // ==========================================
 // HOME CREW - MULTILINGUAL CUSTOMER APP
 // PART 5 (FINAL)
@@ -631,146 +658,6 @@ window.submitComplaint = async function(){
             : selectedLanguage === "Hindi"
             ? "शिकायत जमा नहीं हुई"
             : "Unable to submit complaint"
-        );
-    }
-};
-// ==========================================
-// SHOW BOOKINGS
-// ==========================================
-window.showBookings = async function(){
-    show("profileScreen");
-    const bookingList =
-    document.getElementById("bookingList");
-    bookingList.innerHTML =
-    "<p>Loading...</p>";
-    try{
-        const q = query(
-            collection(db,"bookings"),
-            where(
-                "uid",
-                "==",
-                localStorage.getItem("uid")
-            )
-        );
-        const snapshot =
-        await getDocs(q);
-        if(snapshot.empty){
-            bookingList.innerHTML =
-            "<p>No bookings found.</p>";
-            return;
-        }
-        let html = "";
-        snapshot.forEach((bookingDoc)=>{
-            const booking =
-            bookingDoc.data();
-            let color = "#ffc107";
-            if(
-                booking.status ===
-                "Accepted"
-            ){
-                color = "#198754";
-            }
-            if(
-                booking.status ===
-                "Rejected"
-            ){
-                color = "#dc3545";
-            }
-            if(
-                booking.status ===
-                "Completed"
-            ){
-                color = "#0d6efd";
-            }
-            html += `
-            <div class="booking-card">
-                <h3>
-                    ${booking.service}
-                </h3>
-                <p>
-                    <strong>House:</strong>
-                    ${booking.house || "-"}
-                </p>
-                <p>
-                    <strong>Address:</strong>
-                    ${booking.address}
-                </p>
-                <p>
-                    <strong>Date:</strong>
-                    ${booking.date}
-                </p>
-                <p>
-                    <strong>Time:</strong>
-                    ${booking.time}
-                </p>
-                <p>
-                    <strong>Status:</strong>
-                    <span style="
-                        background:${color};
-                        color:white;
-                        padding:4px 10px;
-                        border-radius:20px;
-                        font-weight:bold;
-                    ">
-                        ${booking.status}
-                    </span>
-                </p>
-                <button
-                class="cancel-btn"
-                onclick="
-                cancelBooking(
-                '${bookingDoc.id}'
-                )">
-                Cancel Booking
-                </button>
-            </div>
-            `;
-        });
-        bookingList.innerHTML =
-        html;
-    }
-    catch(error){
-        console.error(error);
-        bookingList.innerHTML =
-        "<p>Unable to load bookings.</p>";
-    }
-};
-// ==========================================
-// CANCEL BOOKING
-// ==========================================
-window.cancelBooking = async function(id){
-    if(
-        !confirm(
-            selectedLanguage === "Kannada"
-            ? "ಈ ಬುಕಿಂಗ್ ರದ್ದುಪಡಿಸಬೇಕೇ?"
-            : selectedLanguage === "Hindi"
-            ? "क्या आप यह बुकिंग रद्द करना चाहते हैं?"
-            : "Cancel this booking?"
-        )
-    ){
-        return;
-    }
-    try{
-        await deleteDoc(
-            doc(db,"bookings",id)
-        );
-        alert(
-            selectedLanguage === "Kannada"
-            ? "ಬುಕಿಂಗ್ ರದ್ದುಪಡಿಸಲಾಗಿದೆ"
-            : selectedLanguage === "Hindi"
-            ? "बुकिंग रद्द कर दी गई"
-            : "Booking Cancelled"
-        );
-        showBookings();
-    }
-    catch(error){
-        console.error(error);
-        alert(
-            selectedLanguage === "Kannada"
-            ? "ರದ್ದುಪಡಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"
-            : selectedLanguage === "Hindi"
-            ? "बुकिंग रद्द नहीं हुई"
-            : "Unable to cancel booking"
         );
     }
 };
