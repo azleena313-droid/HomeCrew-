@@ -1,3 +1,4 @@
+alert("Script Loaded Successfully");
 // ==========================================
 // HOME CREW - MULTILINGUAL CUSTOMER APP
 // PART 1
