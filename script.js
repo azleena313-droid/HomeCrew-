@@ -1,4 +1,3 @@
-alert("Script Loaded Successfully");
 // ==========================================
 // HOME CREW - MULTILINGUAL CUSTOMER APP
 // PART 1
@@ -17,6 +16,8 @@ import {
   deleteDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+console.log("Script Loaded Successfully");
 // ---------- Global Variables ----------
 let selectedLanguage = "English";
 let selectedService = "";
