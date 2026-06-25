@@ -13,8 +13,17 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
+<!-- WELCOME SCREEN -->
+<section id="welcomeScreen" class="screen active">
+<div class="card">
+<img src="logo.PNG" alt="Home Crew Logo" style="width:220px;">
+<h1>HOME CREW</h1>
+<p>We Care, You Relax</p>
+</div>
+</section>
+
 <!-- LANGUAGE SCREEN -->
-<section id="languageScreen" class="screen active">
+<section id="languageScreen" class="screen">
 <div class="card">
 <h1>🏠 Home Crew</h1>
 <p>Select Language</p>
@@ -50,6 +59,9 @@ Login
 <section id="dashboardScreen" class="screen">
 <div class="card">
 <h2>Choose Service</h2>
+<button onclick="openProfile()">
+👤 My Profile
+</button>
 <div class="service-grid">
 <button onclick="selectService('Electrician')">
 ⚡ Electrician
