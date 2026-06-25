@@ -33,7 +33,6 @@ chooseService:"Choose Service",
 electrician:"⚡ Electrician",
 plumber:"🔧 Plumber",
 cleaning:"🧹 Cleaning",
-carpenter:"🪚 Carpenter",
 painting:"🎨 Painting",
 ac:"❄ AC Service",
 bookNow:"Book Now",
@@ -55,8 +54,6 @@ chooseService:"ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
 electrician:"⚡ ಎಲೆಕ್ಟ್ರಿಷಿಯನ್",
 plumber:"🔧 ಪ್ಲಂಬರ್",
 cleaning:"🧹 ಸ್ವಚ್ಛತೆ",
-carpenter:"🪚 ಕಾರ್ಪೆಂಟರ್",
-painting:"🎨 ಪೇಂಟಿಂಗ್",
 ac:"❄ ಎಸಿ ಸೇವೆ",
 bookNow:"ಬುಕ್ ಮಾಡಿ",
 profile:"ಪ್ರೊಫೈಲ್",
@@ -77,7 +74,6 @@ chooseService:"सेवा चुनें",
 electrician:"⚡ इलेक्ट्रीशियन",
 plumber:"🔧 प्लंबर",
 cleaning:"🧹 सफाई",
-carpenter:"🪚 बढ़ई",
 painting:"🎨 पेंटिंग",
 ac:"❄ एसी सेवा",
 bookNow:"बुक करें",
@@ -351,7 +347,7 @@ window.updateServiceLanguage = function(){
     document.querySelectorAll(
         ".service-grid button"
     );
-    if(buttons.length >= 6){
+    if(buttons.length >= 7){
         buttons[0].textContent =
         t.electrician;
         buttons[1].textContent =
@@ -359,10 +355,8 @@ window.updateServiceLanguage = function(){
         buttons[2].textContent =
         t.cleaning;
         buttons[3].textContent =
-        t.carpenter;
-        buttons[4].textContent =
         t.painting;
-        buttons[5].textContent =
+        buttons[4].textContent =
         t.ac;
     }
 };
