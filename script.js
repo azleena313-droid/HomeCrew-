@@ -677,18 +677,10 @@ window.submitComplaint = async function(){
         );
     }
 };
-// ==========================================
-// WELCOME SCREEN AUTO OPEN
-// ==========================================
-
 window.addEventListener("load", () => {
 
-    setTimeout(() => {
-
-        if (!localStorage.getItem("uid")) {
-            show("languageScreen");
-        }
-
-    }, 3000);
+    if(localStorage.getItem("uid")){
+        autoLogin();
+    }
 
 });
