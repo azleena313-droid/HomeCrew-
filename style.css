@@ -275,3 +275,35 @@ opacity:1;
 transform:translateY(0);
 }
 }
+.welcome-card{
+    text-align:center;
+    padding:30px;
+}
+
+.welcome-logo{
+    width:220px;
+    max-width:80%;
+    margin-bottom:20px;
+}
+
+.tagline{
+    font-size:18px;
+    color:#666;
+    margin-top:10px;
+    letter-spacing:1px;
+}
+
+#welcomeScreen{
+    background: linear-gradient(135deg,#0d47a1,#1976d2);
+    color:white;
+}
+
+#welcomeScreen h1{
+    margin-top:15px;
+    font-size:40px;
+    font-weight:700;
+}
+
+#welcomeScreen .tagline{
+    color:white;
+}
