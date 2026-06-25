@@ -229,6 +229,11 @@ window.logout = function(){
     localStorage.removeItem("uid");
     localStorage.removeItem("userName");
     localStorage.removeItem("mobile");
+  
+  document.getElementById(
+    "bottomNav"
+).style.display = "none";
+  
     show("languageScreen");
 };
 // ==========================================
@@ -263,7 +268,11 @@ window.autoLogin = function(){
         profileMobile.textContent =
         localStorage.getItem("mobile") || "";
     }
-    show("dashboardScreen");
+  document.getElementById(
+    "bottomNav"
+).style.display = "flex";
+  
+show("dashboardScreen");
 };
 // ==========================================
 // APP STARTUP
@@ -271,6 +280,13 @@ window.autoLogin = function(){
 window.addEventListener(
     "load",
     ()=>{
+        const nav =
+        document.getElementById("bottomNav");
+
+        if(nav){
+            nav.style.display = "none";
+        }
+
         restoreLanguage();
         autoLogin();
     }
